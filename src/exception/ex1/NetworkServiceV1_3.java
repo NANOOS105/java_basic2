@@ -2,8 +2,10 @@ package exception.ex1;
 
 public class NetworkServiceV1_3 {
     public void sendMessage(String data) {
+
         NetworkClientV1 client = new NetworkClientV1("http://example.com");
         client.initError(data);
+
         String connectResult = client.connect();
         if (isError(connectResult)) {
             System.out.println("[네트워크 오류 발생] 오류 코드: " + connectResult);
@@ -13,6 +15,9 @@ public class NetworkServiceV1_3 {
                 System.out.println("[네트워크 오류 발생] 오류 코드: " + sendResult);
             }
         }
+
+        //return문 제거하고 if문으로 적절한 분기 사용
+        //return하지 않아서 마지막 disconnect 무조건 호출
         client.disconnect();
     }
     private static boolean isError(String resultCode) {
